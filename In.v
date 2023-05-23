@@ -1,7 +1,5 @@
 `timescale 1ns / 1ps
 
-
-
 module In(
     clk, 
     rst, 
@@ -30,19 +28,20 @@ always @(negedge clk or posedge rst) begin
             if (ALU_addr == 8'h70) begin
                 SwitchData_reg <= {12'h000 ,SwitchInput[3:0]};
             end
-            else if(ALU_addr == 8'h74) begin
-                SwitchData_reg <= {8'h00 ,SwitchInput[19:12]};
+            else if(ALU_addr == 8'h78) begin
+                SwitchData_reg <= {8'h00 ,SwitchInput[11:4]};
             end
-            else if (ALU_addr == 8'h78) begin
-                SwitchData_reg <= {8'h00, SwitchInput[11:4]};
+            else if (ALU_addr == 8'h74) begin
+                SwitchData_reg <= {8'h00, SwitchInput[19:12]};
             end
-            else if (ALU_addr == 8'h7c) begin
-                SwitchData_reg <= {0, SwitchInput[20:20]};
+            else if (ALU_addr == 8'h7C) begin
+                SwitchData_reg <= {15'b0000_0000_0000_000, SwitchInput[20:20]};
             end
             else
-                SwitchData_reg <=  SwitchInput[15:0];
-        end
+                SwitchData_reg <=  16'h0000;
+    end    
     end
+
 end
     
 endmodule

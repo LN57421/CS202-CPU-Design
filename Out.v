@@ -13,7 +13,7 @@ input clk;
 input rst;
 input LEDCtrl;
 input [7:0]ALU_addr;
-input [15:0] OutData;
+input [31:0] OutData;
 
 output [3:0] modeSelect;
 output [31:0] AluResult0;
@@ -40,10 +40,10 @@ always @(posedge clk or posedge rst) begin
                modeSelect_reg <= OutData[3:0];
             end
             else if(ALU_addr == 8'h64) begin
-                AluResult0_reg <= {24'h000000, OutData[7:0]};
+                AluResult0_reg <= OutData[31:0];
             end
             else if(ALU_addr == 8'h68) begin
-                AluResult1_reg <= {24'h000000, OutData[7:0]};
+                AluResult1_reg <= OutData[31:0];
             end
         end
     end

@@ -26,42 +26,46 @@ module cpu_top (
     switch2N4,      //24????????????
     led2N4,         //24???LED?? 
     led_select,     //??????????
-    signal_display,  //????
-     clock,
-     addr_out, //alu?
-     m_wdata, //?mem
-     r_wdata, //reg?
-     SwitchData, //?reg??
-     LEDCtrl, 
-     SwitchCtrl,
-     MemIOtoReg, //controller to dmem
-     MemWrite,
-     MemRead,
-     IOWrite,
-     IORead,
-     read_dat_1,  //???read_dat_1, from decoder to ALU
-     read_dat_2, //reg2
-     instruction, //?IF??????????, from IF to decoder
-     ALU_result,  //ALU??????????
-     addr_result,  //??????
-     branch_base_addr,  //from IF to ALU
-     link_addr,  //from IF t //IF???? from IF to programrom
-     Zero,
-     Branch, nBranch, Jmp, Jal, Jr,
-     sftmd, //??
-     I_format,
-     imme_extend,  //????
-     ALU_Op,
-     ALUSrc,
-     RegWrite,  //????????
-     RegDst,
-     select, //leselect
-     AluResult0, //led
-     AluResult1,//led
-     ram_dat_i,
-     ram_dat_o,
+    signal_display  //????
+    // clock,
+    // addr_out, //alu?
+    // m_wdata, //?mem
+    // r_wdata, //reg?
+    // SwitchData, //?reg??
+    // LEDCtrl, 
+    // SwitchCtrl,
+    // MemIOtoReg, //controller to dmem
+    // MemWrite,
+    // MemRead,
+    // IOWrite,
+    // IORead,
+    // read_dat_1,  //???read_dat_1, from decoder to ALU
+    // read_dat_2, //reg2
+    // instruction, //?IF??????????, from IF to decoder
+    // ALU_result,  //ALU??????????
+    // addr_result,  //??????
+    // branch_base_addr,  //from IF to ALU
+    // link_addr,  //from IF t //IF???? from IF to programrom
+    // Zero,
+    // Branch, nBranch, Jmp, Jal, Jr,
+    // sftmd, //??
+    // I_format,
+    // imme_extend,  //????
+    // ALU_Op,
+    // ALUSrc,
+    // RegWrite,  //????????
+    // RegDst,
+    // select, //leselect
+    // AluResult0, //led
+    // AluResult1,//led
+    // ram_dat_i,
+    // ram_dat_o,
     
-     clk_out_2ms
+    
+    // clk_out_2ms
+    // clk_out_1s,
+    // clk_out_500us
+
 );
 input         fpga_rst;       // ??????????
 input         fpga_clk;       //????
@@ -70,59 +74,63 @@ output  [23:0] led2N4;         //24???LED??
 output [ 7:0] led_select;     //??????????
 output[ 7:0] signal_display;  //????
   //////////////////////////////////////////////////////////////////////////////
-output  wire clock;  //??clk
+  wire clock;  //??clk
   /////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////
   // IO ??????????????
-output     wire [31:0] addr_out;
-output     wire [31:0] m_wdata;
-output    wire [31:0] r_wdata;
-output  wire [15:0] SwitchData;
-output  wire LEDCtrl;
-output  wire SwitchCtrl;
+ wire [31:0] addr_out;
+   wire [31:0] m_wdata;
+  wire [31:0] r_wdata;
+
+  wire [15:0] SwitchData;
+  wire LEDCtrl;
+  wire SwitchCtrl;
+
   //Controller ???????IO???????
-output  wire MemIOtoReg;  //controller to dmem
-output  wire MemWrite;
-output  wire MemRead;
-output  wire IOWrite;
-output  wire IORead;
+  wire MemIOtoReg;  //controller to dmem
+  wire MemWrite;
+  wire MemRead;
+  wire IOWrite;
+  wire IORead;
+
 
   /////////////////////////////////////////////////////////////////////////////
   // ?CPU????
-output  wire [31:0] ram_dat_i;  //????????????32????from decoder to dmem
-output  wire [31:0] ram_dat_o;  //???????????????? from dmem to decoder
-output  wire [31:0] read_dat_1;  //???read_dat_1, from decoder to ALU
-output  wire [31:0] read_dat_2;  //???read_dat_2, from decoder to ALU
+  wire [31:0] ram_dat_i;  //????????????32????from decoder to dmem
+  wire [31:0] ram_dat_o;  //???????????????? from dmem to decoder
+
+  wire [31:0] read_dat_1;  //???read_dat_1, from decoder to ALU
+  wire [31:0] read_dat_2;  //???read_dat_2, from decoder to ALU
 
 assign ram_dat_i = read_dat_2;
 
 
- output  wire [31:0] instruction;  //?IF??????????, from IF to decoder
- output  wire [31:0] ALU_result;  //ALU??????????
- output  wire [31:0] addr_result;  //??????
- output  wire [31:0] branch_base_addr;  //from IF to ALU
- output  wire [31:0] link_addr;  //from IF to Decoder
+  wire [31:0] instruction;  //?IF??????????, from IF to decoder
+  wire [31:0] ALU_result;  //ALU??????????
+  wire [31:0] addr_result;  //??????
+  wire [31:0] branch_base_addr;  //from IF to ALU
+  wire [31:0] link_addr;  //from IF to Decoder
 
 
   // ?????????????
-output  wire Zero;
-output  wire Branch, nBranch, Jmp, Jal, Jr;
-output  wire sftmd;  //??
-output  wire I_format;
-output  wire [31:0] imme_extend;  //????
-output  wire [1:0] ALU_Op;
-output  wire ALUSrc;
-output  wire RegWrite;  //????????
-output  wire RegDst;
+  wire Zero;
+  wire Branch, nBranch, Jmp, Jal, Jr;
+  wire sftmd;  //??
+  wire I_format;
+  wire [31:0] imme_extend;  //????
+  wire [1:0] ALU_Op;
+  wire ALUSrc;
+  wire RegWrite;  //????????
+  wire RegDst;
 
   /////////////////////////////////////////////////////////////////////////////
   // LED
- output  wire [3:0] select;
- output  wire [31:0] AluResult0;
- output  wire [31:0] AluResult1;
- output  wire clk_out_2ms;
-         wire clk_out_1s;
-        wire clk_out_500us;
+  wire [3:0] select;
+  wire [31:0] AluResult0;
+  wire [31:0] AluResult1;
+  wire clk_out_2ms;
+  wire clk_out_1s;
+  wire clk_out_500us;
 
 
   clk_wiz_0 clk (
@@ -218,16 +226,6 @@ output  wire RegDst;
       .clk_out_500us(clk_out_500us)
   );
 
-//   led LED(
-//      .reset(fpga_rst),
-//      .clk_2ms(clk_out_2ms),
-//      .modeSelect(select),
-//      .AluResult0(AluResult0),
-//      .AluResult1(AluResult1),
-//      .led_select(led_select),
-//      .signal_display(signal_display)
-//  );
-
   MemOrIO MemOrIO (
       .mRead(MemRead),
       .mWrite(MemWrite),
@@ -281,7 +279,8 @@ output  wire RegDst;
     .AluResult0(AluResult0),
     .AluResult1(AluResult1),
     .led_select(led_select),
-    .signal_display(signal_display)
+    .signal_display(signal_display),
+    .led_display(led2N4)
     );
 
 endmodule

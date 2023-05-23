@@ -165,7 +165,7 @@ output  wire Zero;
   ALU alu (
       .Read_data_1(read_dat_1),
       .Read_data_2(read_dat_2),
-      .Imme_extend(imme_extend),
+      .Sign_extend(imme_extend),
       .Function_opcode(instruction[5:0]),
       .opcode(instruction[31:26]),
       .Shamt(instruction[10:6]),
@@ -226,16 +226,6 @@ output  wire Zero;
       .clk_out_500us(clk_out_500us)
   );
 
-//   led LED(
-//      .reset(fpga_rst),
-//      .clk_2ms(clk_out_2ms),
-//      .modeSelect(select),
-//      .AluResult0(AluResult0),
-//      .AluResult1(AluResult1),
-//      .led_select(led_select),
-//      .signal_display(signal_display)
-//  );
-
   MemOrIO MemOrIO (
       .mRead(MemRead),
       .mWrite(MemWrite),
@@ -289,7 +279,7 @@ output  wire Zero;
     .AluResult0(AluResult0),
     .AluResult1(AluResult1),
     .led_select(led_select),
-    .signal_display(signal_display)
+    .signal_display(signal_display),
+    .led_display(led2N4)
     );
-
 endmodule
