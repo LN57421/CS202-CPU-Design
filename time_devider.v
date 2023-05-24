@@ -17,9 +17,9 @@ module TimeDivider (
   output reg clk_out_1s;
   output reg clk_out_500us;
 
-  parameter period_500us = 50;
-  parameter period_2ms = 200;
-  parameter period_1s = 1_00;
+  parameter period_500us = 50_000;
+  parameter period_2ms = 2_000_00;
+  parameter period_1s = 1_00_000_000;
 
   reg [21:0] cnt_20ms;
   reg [28:0] cnt_1s;
