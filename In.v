@@ -37,8 +37,6 @@ always @(negedge clk or posedge rst) begin
             else if (ALU_addr == 8'h7C) begin
                 SwitchData_reg <= {15'b0000_0000_0000_000, SwitchInput[20:20]};
             end
-            else
-                SwitchData_reg <=  16'h0000;
     end    
     end
 

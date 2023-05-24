@@ -24,7 +24,7 @@ module CPUTop_sim();
 reg fpga_clk;
 reg fpga_rst;
 reg [23:0] switch2N4;
-wire [23:0] led2N4, LedOut;
+wire [23:0] led2N4;
 wire clk;
 
 wire [31:0] addr_result;
@@ -57,7 +57,7 @@ wire [7:0] led_select;
 wire [7:0] signal_display;
 wire [3:0] select;
 wire clk_2ms;
-cpu_top cpu(    
+cpu_top_test cpu(    
 fpga_rst,       // 高电平有效的复位信号
 fpga_clk,       //时钟信号
 switch2N4,      //24位宽的输入信??????
@@ -100,20 +100,19 @@ ram_dat_o,
  clk_2ms
 );
 initial fork
-fpga_rst <= 1'b1;
+fpga_rst <= 1'b0;
 fpga_clk <= 0;
-switch2N4 <= 0;
-#5
+switch2N4 <= 24'b000000000000_000000000000;
+#5000
+fpga_rst <= 1'b1;
+#5100
 fpga_rst <= 0;
-switch2N4[15:0] <= 16'h0001;
-switch2N4[23:16] <= 8'h01;
-#2000
-switch2N4[20:20] <= 1'b1;
-switch2N4[19:0] <= 20'b00000101_00000110_0000;
-switch2N4[23:21] <= 0;
-//#4000
-//switch2N4[15:0] <= 16'h0100;
+//switch2N4[15:0] <= 16'h0001;
 //switch2N4[23:16] <= 8'h01;
+#5120
+switch2N4 <= 24'b0001_00000101_00000110_0000;
+#5140
+switch2N4 <= 24'b0001_00000000_00000110_0000;
 //#6000
 //switch2N4[15:0] <= 16'h1000;
 //switch2N4[23:16] <= 8'h10;
