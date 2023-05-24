@@ -20,7 +20,7 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module cpu_top (
+module cpu_top_test (
     fpga_rst,       // ??????????
     fpga_clk,       //????
     switch2N4,      //24????????????
@@ -258,7 +258,7 @@ output  wire Zero;
       .rst(fpga_rst),
       .LEDCtrl(LEDCtrl),
       .ALU_addr(ALU_result[7:0]),
-      .OutData(m_wdata[15:0]),
+      .OutData(m_wdata),
       .modeSelect(select),
       .AluResult0(AluResult0),
       .AluResult1(AluResult1)
