@@ -1,23 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2022/05/08 15:51:47
-// Design Name: 
-// Module Name: ALU
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
 module ALU(Read_data_1,Read_data_2,Sign_extend,Function_opcode,opcode,ALUOp,
@@ -77,12 +58,7 @@ module ALU(Read_data_1,Read_data_2,Sign_extend,Function_opcode,opcode,ALUOp,
         3'b010: ALU_output_mux = $signed(Ainput) + $signed(Binput);           //add,addi
         3'b011: ALU_output_mux = Ainput + Binput;                             //addu,addiu
         3'b100: ALU_output_mux = Ainput ^ Binput;                             //xor,xori
-        3'b101: begin
-            if(I_format)
-                ALU_output_mux = {Binput[15:0], {16{1'b0}}};                 //lui
-            else 
-                ALU_output_mux = ~(Ainput | Binput);                          //nor
-        end                          
+        3'b101: ALU_output_mux = ~(Ainput | Binput);                        //nor                         
         3'b110: ALU_output_mux = $signed(Ainput) - $signed(Binput);           //sub,slti,beq,bne
         3'b111: ALU_output_mux = Ainput - Binput;                             //subu,sltiu,slt,sltu
         default: ALU_output_mux = 32'h0000_0000;
