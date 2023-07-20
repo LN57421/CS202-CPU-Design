@@ -67,10 +67,7 @@
 #### （1）ISA
 
 
-
-<img src="image-20230530225211247.png" alt="image-20230530225211247" style="zoom: 50%;" />
-
-- 上述指令均已实现
+- 基本的MIPS32指令集全部实现
 
 - 采用是32个32位宽的寄存器
 
@@ -81,8 +78,6 @@
 #### （2）寻址空间的设计
 
 **哈佛结构**
-
-<img src="image-20230530225720978.png" alt="image-20230530225720978" style="zoom:50%;" />
 
 其中ALU对应**ALU**模块，control unit对应**control**模块，Data Memory 对应**dmemory**模块， Instructins Memory 对应**IFetch**模块，I/O对应**memoryorio、in、out**模块。
 
@@ -149,8 +144,6 @@ module top (
 ### 3.CPU内部结构
 
 #### （1）CPU内部各子模块的接口连接关系图
-
-![image-20230601164215756](image-20230601164215756.png)
 
 **清晰的接线图见附件一PDF文件**
 
@@ -1162,8 +1155,6 @@ case111:
 #### 实现思路
 
 - 串口通信工作流程图如下：
-
-<img src="image-20230601163422060.png" alt="image-20230601163422060" style="zoom: 50%;" />
 
 uart模块是通过串口通信获得数据后通过ip核往指令空间和数据空间里写数据。
 
